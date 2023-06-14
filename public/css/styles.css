@@ -1,0 +1,364 @@
+@import url('https://fonts.googleapis.com/css2?family=Assistant&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap');
+@import url('../bootstrap/css/bootstrap.css');
+
+:root {
+    --cheese: #FFF8EE;
+    --beige: #EFD8BE;
+    --cherry: #F283A5;
+    --purple: #8D6C9F;
+    --darkpurple: #473650;
+    --background: rgb(33, 25, 25);
+}
+
+html, body {
+    font-family: 'Assistant', sans-serif;
+    background: var(--background);
+    color: var(--beige);
+}
+
+.logo {
+    font-family: 'Homemade Apple', sans-serif;
+    color: var(--cheese);
+    font-size: 25px;
+}
+
+#logo-img {
+    width: 70px;
+}
+
+.main {
+    min-height: 100vh;
+    padding-bottom: 2%;
+}
+
+.main-index {
+    min-height: 100vh;
+    padding: 0;
+}
+
+.navbar, .bg-body-tertiary, .offcanvas-body, .offcanvas {
+    background-color: var(--background) !important;
+    border-bottom: 1.5px solid black;
+    font-size: 20px;
+}
+
+.breadcrumb {
+    margin: 1% 0 1% 2%;
+    color: var(--beige);
+    font-size: 18px;
+}
+
+.breadcrumb-item > a {
+    color: var(--beige);
+}
+
+.breadcrumb > .active {
+    color: grey;
+}
+
+a {
+    text-decoration: none;
+}
+
+.nav-link {
+    color: var(--cheese);
+    font-family: 'Assistant', sans-serif;
+    padding: 0.5rem 1rem;
+	display: inline-block;
+	position: relative;
+	text-decoration: none;
+}
+
+.nav-link:after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	transform: scaleX(0);
+	height: 2px;
+	bottom: 0;
+	left: 0;
+	background: var(--cheese);
+	transform-origin: bottom right;
+	transition: transform 0.5s ease-out;
+}
+
+.nav-link:hover:after {
+	transform: scaleX(1);
+	transform-origin: bottom left;
+}
+
+.nav-link:hover {
+    color: var(--purple);
+    transition: all 0.5s ease-in-out;
+}
+
+.grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 12%;
+}
+
+.card {
+    font-family: 'Assistant', sans-serif;
+    background-color: var(--background);
+    color: var(--beige);
+}
+
+.card_i {
+    margin: 1%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: 10px 10px 20px 2px black;
+    transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.card_i:hover {
+    -webkit-transform: scale(1.12, 1.12);
+    transform: scale(1.12, 1.12);
+}
+
+.card_cat {
+    width: 70%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.card-footer {
+    border-top: 1px solid var(--beige);
+}
+
+.grid-item {
+    width: 25%;
+}
+
+.svg {
+    width: 800px;
+}
+
+#btn-book {
+    background-color: var(--purple);
+    color: whitesmoke;
+}
+
+.hero-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../images/index.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100vh;
+}
+
+.hero-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.hero-text p {
+    font-family: 'Homemade Apple', sans-serif;
+    font-size: 45px;
+}
+
+.hero-text p:nth-child(2) {
+    font-family: 'Assistant', sans-serif;
+    font-size: 25px;
+    width: 50%;
+}
+
+footer {
+    background-color: rgb(33, 25, 25);
+    color: whitesmoke;
+    border-top: 1.5px solid black;
+    padding: 50px 0;
+    font-size: 20px;
+}
+
+footer a {
+    color: whitesmoke;
+}
+
+.titulo {
+    font-family: 'Homemade Apple', sans-serif;
+    margin: 1%;
+    text-align: center;
+}
+
+.dropdown {
+    margin: 2%;
+    width: 20%;
+}
+
+.container-mobile {
+    background-color: rgb(33, 25, 25);
+    color: var(--beige);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15%;
+    padding: 5% 0;
+    min-height: 100vh;
+}
+
+.container-mobile img:nth-child(2) {
+    border-radius: 50px;
+    border: 2px solid black;
+    transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    box-shadow: 10px 10px 20px 2px black;
+}
+
+.container-mobile img:nth-child(2):hover {
+    transform: scale(1.12);
+}
+
+.mobile-c1 {
+    font-size: 30px;
+}
+
+.mobile-c2 {
+    font-size: 20px;
+}
+
+.container-book {
+    background-color: rgb(33, 25, 25);
+    color: var(--beige);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15%;
+    padding: 5% 0;
+    min-height: 100vh;
+}
+
+.container-book img {
+    border-radius: 50px;
+    border: 2px solid black;
+    transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    box-shadow: 10px 10px 20px 2px black;
+}
+
+.container-book img:hover {
+    transform: scale(1.12);
+}
+
+.img-mostrar {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 50%;
+}
+
+.container-texto {
+    width: 90%;
+    margin: 2%;
+    font-size: 20px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 50%;
+}
+
+#floatingInputGroup1 {
+    background-color: var(--background);
+    color: var(--beige);
+    font-size: 22px;
+}
+
+@media only screen and (max-width: 600px) {
+    .titulo {
+        font-family: 'Homemade Apple', sans-serif;
+        font-size: 25px;
+        margin: 5%;
+        text-align: center;
+    }
+
+    .breadcrumb {
+        font-size: 25px;
+    }
+
+    .hero-image {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/index.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 100vh;
+    }
+    
+    .hero-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 100px;
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 40px;
+    }
+
+    .navbar {
+        background-color: rgb(33, 25, 25);
+        border-bottom: 1.5px solid black;
+        font-size: 20px;
+        z-index: 1;
+    }
+
+    .navbar-nav {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .grid {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 12%;
+        gap: 5px;
+    }
+
+    .form-select {
+        margin: 2%;
+        width: 60%;
+    }
+
+    .container-mobile {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card {
+        width: 300px;
+        margin-bottom: auto auto 10% auto;
+    }
+
+    .card-title {
+        font-size: 25px;
+    }
+
+    .dropdown {
+        margin-left: 25%;
+    }
+
+    .dropdown-toggle {
+        font-size: 20px;
+    }
+}

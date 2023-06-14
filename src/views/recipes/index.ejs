@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+    <title>Recetas - La Cocina de Hestia</title>
+</head>
+<body>
+    <%- include('../partials/nav') %>
+
+  <div class="main">
+
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Recetas</li>
+      </ol>
+    </nav>
+
+    <h4 class="titulo">Last added recipes</h4>
+
+    <!--<form class="d-flex" role="search" action="recipes/search" method="get">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>-->
+
+    <div class="dropdown">
+      <button class="btn btn-danger dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Search by categories
+      </button>
+      <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="/categories/1"><img src="../../images/icons/cheesecake-dark.png" width="35"> Pies</a></li>
+        <li><a class="dropdown-item" href="/categories/2"><img src="../../images/icons/galletas-dark.png" width="35"> Cookies</a></li>
+        <li><a class="dropdown-item" href="/categories/3"><img src="../../images/icons/macaroons-dark.png" width="35"> Alfajores</a></li>
+        <li><a class="dropdown-item" href="/categories/4"><img src="../../images/icons/whipped-cream-dark.png" width="35"> Mousse</a></li>
+        <li><a class="dropdown-item" href="/categories/5"><img src="../../images/icons/custard-dark.png" width="35"> Custard</a></li>
+        <li><a class="dropdown-item" href="/categories/6"><img src="../../images/icons/helado-dark.png" width="35"> Ice Cream</a></li>
+        <li><a class="dropdown-item" href="/categories/7"><img src="../../images/icons/muffin-dark.png" width="35"> Muffins</a></li>
+      </ul>
+    </div>
+    <br>
+    <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 20 }'>
+      <% recipes.forEach(recipe => { %>
+      <a href="/recipes/<%= recipe.id %>" style="color:black;">
+      <div class="card grid-item card_i">
+        <img src="../uploads/<%= recipe.imagen %>" class="card-img-top" alt="<%= receta.titulo %>">
+        <div class="card-body">
+          <h5 class="card-title"><%= recipe.title %></h5>
+          <p class="card-text"><%- recipe.content.substring(0, 100) %></p>
+        </div>
+        <div class="card-footer">
+          <% if (recipe.category == "Alfajores") { %>
+            <img src="../../images/icons/macaroons.png" width="30"> <%= receta.categoria %>
+          <% } else if (recipe.category == "Galletas") { %>
+            <img src="../../images/icons/galletas.png" width="30"> <%= receta.categoria %>
+          <% } else if (recipe.category == "Tartas") { %>
+            <img src="../../images/icons/cheesecake-light.png" width="30"> <%= receta.categoria %>
+          <% } else if (recipe.category == "Mousses") { %>
+            <img src="../../images/icons/whipped-cream-light.png" width="30"> <%= receta.categoria %>
+          <% } else if (recipe.category == "Flanes") { %>
+            <img src="../../images/icons/custard-light" width="30"> <%= receta.categoria %>
+          <% } else if (recipe.category == "Helados") { %>
+            <img src="../../images/icons/helado-light.png" width="30"> <%= receta.categoria %>
+          <% } else if (recipe.category == "Muffins") { %>
+            <img src="../../images/icons/muffin-light.png" width="30"> <%= receta.categoria %>
+          <% } else { %>
+            <%= recipe.category %>
+          <% } %>
+        </div>
+        <div class="card-footer">
+          Created by: <%= recipe.createdBy %>
+        </div>
+      </div>
+      <% }) %>
+      </a>
+    </div>
+  </div>
+
+    <%- include('../partials/footer') %>
+    <script src="../js/masonry.pkgd.min.js"></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
+  </body>
+</html>

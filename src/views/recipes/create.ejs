@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('../partials/head') %>
+  <title>Create your recipe | Hestia Cooking</title>
+</head>
+<body>
+    <%- include('../partials/nav') %>
+
+    <div class="main">
+      <br>
+        <h5 class="titulo">Create your recipe</h5> 
+        <% if (typeof errors != 'undefined') { %>
+        <ul>
+          <% errors.forEach(error => { %>
+          <li><strong><%= error.path %>: </strong><%= error.message %></li>
+          <% }) %>
+        </ul>
+        <% } %>
+  
+        <form action="/recipes/store" method="post" enctype="multipart/form-data">
+          <div class="mb-3 row">
+            <label for="titulo" class="col-sm-2 col-form-label">Títle</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" name="titulo" id="titulo" value="<%= values.titulo %>"/>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="imagen" class="col-sm-2 col-form-label">Image:</label>
+            <div class="col-sm-8">
+              <input type="file" class="form-control" name="imagen" id="imagen" />
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="contenido" class="col-sm-2 col-form-label">Content:</label>
+            <div class="col-sm-8">
+              <textarea class="form-control" name="contenido" id="contenido" rows="10"> <%= values.contenido %></textarea>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="contenido" class="col-sm-2 col-form-label">Category: </label>
+            <div class="col-sm-8">
+              <select class="form-select" aria-label="Default select example"><% values.categoria %>
+                <option selected>Choose and option</option>
+                <option value="1">Tartas</option>
+                <option value="2">Galletas</option>
+                <option value="3">Alfajores</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-danger btn-lg">Upload recipe</button>
+          <a href="/" class="btn btn-warning btn-lg">Go back</a>
+        </form>
+      </div>
+
+    <%- include('../partials/footer') %>
+</body>
+</html>

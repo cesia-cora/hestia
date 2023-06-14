@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+    <title>Edit your recipe | Hestia Cooking</title>
+</head>
+<body>
+    <%- include('../partials/nav') %>
+
+    <div class="main">
+      <br>
+        <h5 class="titulo">Edit recipe</h5>
+  
+        <form action="/recipes/<%= recipe.id %>/actualizar?_method=PUT" method="post">
+          <div class="mb-3 row">
+            <label for="titulo" class="col-sm-2 col-form-label">Title:</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" name="titulo" id="titulo" value="<%= receta.titulo %>"/>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="contenido" class="col-sm-2 col-form-label">Content:</label>
+            <div class="col-sm-8">
+              <textarea class="form-control" name="contenido" id="contenido" rows="10"> <%= receta.contenido %></textarea>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label for="contenido" class="col-sm-2 col-form-label">Category:</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" list="categorias" name="categoria" id="exampleDataList" placeholder="Search a category..." value="<%= recipe.category %>">
+              <datalist id="categorias">
+                <option value="Tartas">
+                <option value="Alfajores">
+                <option value="Galletas">
+                <option value="Mousses">
+                <option value="Flanes">
+                <option value="Helados">
+                <option value="Muffins">
+              </datalist>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-danger btn-lg">Save changes</button>
+          <a href="/recipes/<%= recipe.id %>" class="btn btn-warning btn-lg">Go back</a>
+        </form>
+      </div>
+
+    <%- include('../partials/footer') %>
+</body>
+</html>

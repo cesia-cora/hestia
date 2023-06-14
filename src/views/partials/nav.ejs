@@ -1,0 +1,49 @@
+<nav class="navbar navbar-dark bg-body-tertiary" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a href="/" class="logo justify-content-center">Hestia <img src="../../images/cheesecake.png" id="logo-img"> Cooking</a>
+    <a class="nav-link" href="/">Easy and Cheap</a>
+    <a class="nav-link" href="/">Dessert of the week</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Authentication</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <% if (typeof user=='undefined' ) { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/login">Log in</a>
+            </li>
+            <% } else { %>
+              <li class="nav-item">
+                <a class="nav-link" href="/recipes/create">Upload recipe</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/profile/<%= user %>">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Log out</a>
+              </li>
+              <% } %>
+        </ul>
+        <br>
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Categories</h5>
+        <br>
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+          <li class="nav-item">
+            <a class="nav-link" href="/categories/3">Alfajores</a>
+          </li>
+        </ul>
+        <br>
+        <form class="d-flex" role="search" action="recetas/buscar" method="get">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <%- include('../partials/head') %>
+    <title>Inicio de Sesión</title>
+</head>
+<body>
+    <%- include('../partials/nav') %>
+
+    <h4 class="titulo">Inicio de Sesión</h4>
+
+    <div class="input-group">
+    <form action="/login" method="post">
+        <div class="form-floating mb-5">
+            <input type="text" name="username" class="form-control" id="floatingInputGroup1" placeholder="name">
+            <label for="floatingInputGroup1">Nombre de usuario:</label>
+        </div>
+        <div class="form-floating mb-5">
+            <input type="password" name="password" class="form-control" id="floatingInputGroup1" placeholder="Password">
+            <label for="floatingInputGroup1">Contraseña:</label>
+        </div>
+        <div class="d-grip gap-2">
+            <button type="submit" class="btn btn-outline-danger mb-5">Iniciar sesión</button>
+        </div>
+    </form>
+    </div>
+
+    <a class="btn btn-danger btn-lg mx-auto p-2" href="/register">¿No tienes cuenta? Regístrate</a>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ('partials/head') %>
+    <title>Hestia Cooking | Share your desserts!</title>
+</head>
+<body>
+    <%- include('partials/nav') %>
+<div class="main-index">
+    
+      <div class="hero-image">
+        <div class="hero-text delay-1000">
+          <p>Discover the best dessert recipes</p>
+          <p>Mousse, pies, cakes, cookies and a lot more! 😋</p>
+          <a href="/recipes" class="btn btn-danger btn-lg">All recipes 🍰</a></div>
+      </div>
+</div>
+    <script src="../js/masonry.pkgd.min.js"></script>
+    <%- include('partials/footer') %>
+
+    <script>
+      ScrollReveal().reveal('.delay-1000', {delay: 500});
+      ScrollReveal().reveal('.delay-800', {delay: 300});</script>    
+  </body>
+</html>
