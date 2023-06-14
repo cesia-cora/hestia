@@ -3,22 +3,16 @@
 A cooking web app to share dessert recipes.
 This was created as a practice after a long training course with Express.js and MySQL.
 
-<br>
-
 ### Why "Hestia"?
 
 Hestia is the greek goddess of the hearth.
 
-<br>
-
 ### How to run:
-Run the SQL port
+1. Run the SQL port
 
-`npm install` (to install all dependencies)
+2. `npm install` (to install all dependencies)
 
-`node --watch app.js`
-
-<br>
+3. `node --watch app.js`
 
 ### Features:
 
@@ -37,11 +31,13 @@ Run the SQL port
 
 ### Routes:
 
-`localhost:3000/recetas
-localhost:3000/recetas/crear
-localhost:3000/recetas/{id}
-localhost:3000/recetas/{id}/editar
-localhost:3000/recetas/{id}/eliminar
-localhost:3000/categorias
-localhost:3000/categorias/{id}
-localhost:3000/perfil/{id}`
+`localhost:3000/recipes`
+`localhost:3000/recipes/create`
+`localhost:3000/recipes/{id}`
+`localhost:3000/recipes/{id}/edit`
+`localhost:3000/recipes/{id}/update`
+`localhost:3000/recipes/{id}/update_image`
+`localhost:3000/recipes/{id}/destroy`
+`localhost:3000/categories`
+`localhost:3000/categories/{id}`
+`localhost:3000/profile/{id}`
