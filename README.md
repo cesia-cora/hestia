@@ -32,12 +32,21 @@ Hestia is the greek goddess of the hearth.
 ### Routes:
 
 `localhost:3000/recipes`
+
 `localhost:3000/recipes/create`
+
 `localhost:3000/recipes/{id}`
+
 `localhost:3000/recipes/{id}/edit`
+
 `localhost:3000/recipes/{id}/update`
+
 `localhost:3000/recipes/{id}/update_image`
+
 `localhost:3000/recipes/{id}/destroy`
+
 `localhost:3000/categories`
+
 `localhost:3000/categories/{id}`
+
 `localhost:3000/profile/{id}`
