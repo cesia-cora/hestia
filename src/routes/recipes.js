@@ -7,6 +7,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 const controller = require('../controllers/RecipeControllers');
 
 router.get('/', controller.index);
+router.get('/search', controller.search);
 router.get('/create', controller.create);
 router.post('/store', upload.single('image'), controller.store);
 router.get('/:id', controller.show);

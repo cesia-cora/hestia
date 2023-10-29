@@ -4062,7 +4062,7 @@ textarea.form-control-lg {
   width: 1.5em;
   height: 1.5em;
   vertical-align: middle;
-  background-image: var(--bs-navbar-toggler-icon-bg);
+  /* background-image: var(--bs-navbar-toggler-icon-bg); */
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;
@@ -5363,7 +5363,7 @@ textarea.form-control-lg {
   height: 1em;
   padding: 0.25em 0.25em;
   color: var(--bs-btn-close-color);
-  background: transparent var(--bs-btn-close-bg) center/1em auto no-repeat;
+  background: transparent url('https://static-00.iconduck.com/assets.00/close-icon-2048x2047-22z7exfk.png') center/1em auto no-repeat;
   border: 0;
   border-radius: 0.375rem;
   opacity: var(--bs-btn-close-opacity);

@@ -4,7 +4,7 @@
 <head>
     <%- include('../partials/head') %>
         <title>
-            <%= recipe.title %>
+            <%= recipe.title %> | Hestia Cooking
         </title>
 </head>
 
@@ -24,15 +24,15 @@
             </nav>
 
             <img src="../uploads/<%= recipe.image %>" class="img-mostrar">
-            <% if (recipe.createdBy==username || typeof user !='undefined' ) { %>
-                <button class="btn btn-danger ms-5" onclick="showBtnEdit()">Cambiar imagen</button>
+            <% if (recipe.createdBy==username && typeof user !='undefined' ) { %>
+                <button class="btn btn-danger ms-5" onclick="showBtnEdit()">Change image</button>
                 <p></p>
                 <div class="showBtnEdit">
                     <form action="/recipes/<%= recipe.id %>/update_image?_method=PUT" method="post"
                         enctype="multipart/form-data" style="margin-left:3%;width:40%;">
                         <div class="mb-3 row">
                             <div class="col-sm-8">
-                                <input type="file" class="form-control" name="imagen" id="imagen">
+                                <input type="file" class="form-control" name="image" id="image">
                             </div>
                         </div>
                         <button type="submit" class="btn btn-danger ms-3">Save</button>
@@ -44,16 +44,16 @@
                         <h3>
                             <%= recipe.title %>
                         </h3>
+                        <p class="fs-5">By
+                            <span style="color:palevioletred"><%= recipe.createdBy %></span>
+                        </p>
+                        <p class="fs-5">More
+                            <%= recipe.category %></a> Recipes
+                        </p>
                         <p><%- recipe.content %></p>
-                        <p><b>Category: </b>
-                            <%= recipe.category %></a>
-                        </p>
-                        <p><b>Created by: </b>
-                            <%= recipe.createdBy %>
-                        </p>
                     </div>
 
-                    <% if (recipe.createdBy==username || typeof user !='undefined' ) { %>
+                    <% if (recipe.createdBy==username && typeof user !='undefined' ) { %>
                         <a class="btn btn-danger btn-lg ms-5" href="/recipes/<%= recipe.id %>/edit">Edit</a>
                         <% } %>
         </div>

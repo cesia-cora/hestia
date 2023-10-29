@@ -3,38 +3,136 @@
 
 <head>
   <%- include('../partials/head') %>
-    <title>Recetas - La Cocina de Hestia</title>
+    <title>Recipes | Hestia Cooking</title>
 </head>
 
 <body>
   <%- include('../partials/nav') %>
 
-  <div class="main">
+    <div class="main">
       <nav
         style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
         aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="/">Inicio</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Recetas</li>
+          <li class="breadcrumb-item"><a href="/">Index</a></li>
+          <li class="breadcrumb-item"><a href="/recipes">Recipes</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Categories</li>
         </ol>
       </nav>
 
-      <h4 class="titulo">Todas las categorías</h4>
-
-      <% categorias.forEach(categoria => { %>
+      <h4 class="titulo">All Categories</h4>
+      <br>
       <div class="card card_cat">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">
-              <%= categoria.categoria %>
-            </h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-              content. This content is a little bit longer.</p>
-          </div>
+        <img src="../images/categories/pies.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Pies
+          </h5>
+          <p class="card-text">Baked dish which is usually made of a pastry dough casing that contains a filling of
+            various sweet or savoury ingredients.
+            Sweet pies may be filled with fruit (as in an apple pie), nuts (pecan pie), fruit preserves (jam tart),
+            brown sugar (sugar pie), sweetened vegetables (rhubarb pie), or with thicker fillings based on eggs and
+            dairy (as in custard pie and cream pie).</p>
+          <a class="btn btn-danger" href="/categories/1">View recipes</a>
+        </div>
       </div>
-      <% }) %>
-
+      <br>
+      <div class="card card_cat">
+        <img src="../images/categories/alfajores.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Alfajores
+          </h5>
+          <p class="card-text">Traditional confection typically made of flour, honey, and nuts.
+            It is produced in the form of a small
+            cylinder and is sold either individually or in boxes containing several pieces.</p>
+          <a class="btn btn-danger" href="categories/3">View recipes</a>
+        </div>
+      </div>
+      <br>
+      <div class="card card_cat">
+        <img src="../images/categories/cookies.avif" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Cookies
+          </h5>
+          <p class="card-text">Baked or cooked snack or dessert that is typically small, flat and sweet.
+            It usually contains flour, sugar, egg, and some type of oil, fat, or butter. It may include other
+            ingredients such as raisins, oats, chocolate chips, nuts, etc.</p>
+            <a class="btn btn-danger" href="categories/2">View recipes</a>
+        </div>
+      </div>
+      <br>
+      <div class="card card_cat">
+        <img src="../images/categories/mousse.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Mousse
+          </h5>
+          <p class="card-text">Soft prepared food that incorporates air bubbles to give it a light and airy texture.
+            Depending on preparation techniques, it can range from light and fluffy to creamy and thick. </p>
+            <a class="btn btn-danger" href="/categories/4">View recipes</a>
+        </div>
+      </div>
+      <br>
+      <div class="card card_cat">
+        <img src="../images/categories/custard.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Custard
+          </h5>
+          <p class="card-text">Variety of culinary preparations based on sweetened milk, cheese, or cream cooked with
+            egg or egg yolk to thicken it, and sometimes also flour, corn starch, or gelatin.</p>
+            <a class="btn btn-danger" href="/categories/5">View recipes</a>
+        </div>
+      </div>
+      <br>
+      <div class="card card_cat">
+        <img src="../images/categories/ice_cream.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Ice Cream
+          </h5>
+          <p class="card-text">Frozen dessert typically made from milk or cream that has been flavoured with a
+            sweetener, either sugar or an alternative, and a spice, such as cocoa or vanilla, or with fruit, such as
+            strawberries or peaches.
+            Food colouring is sometimes added in addition to stabilizers.</p>
+            <a class="btn btn-danger" href="/categories/6">View recipes</a>
+        </div>
+      </div>
+      <br>
+      <div class="card card_cat">
+        <img src="../images/categories/muffins.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Muffins
+          </h5>
+          <p class="card-text">Individually portioned baked product; however, the term can refer to one of two distinct
+            items:
+            a part-raised flatbread (like a crumpet) that is baked and then cooked on a griddle (typically unsweetened),
+            or a (often sweetened) quickbread that is chemically leavened and then baked in a mold.</p>
+            <a class="btn btn-danger" href="/categories/7">View recipes</a>
+        </div>
+      </div>
+      <br>
+      <div class="card card_cat">
+        <img src="../images/categories/pastries.jpg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Pastries
+          </h5>
+          <p class="card-text">Baked products made from ingredients such as flour, sugar, milk, butter, shortening,
+            baking powder, and eggs. Small tarts and other sweet baked products are called pastries as a synecdoche.
+            Common pastry dishes include pies, tarts, quiches, croissants, and pasties.</p>
+            <a class="btn btn-danger" href="/categories/8">View recipes</a>
+        </div>
+      </div>
+      <br>
+      <div class="card card_cat">
+        <img src="../images/categories/confectionery.jpeg" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Confectionery
+          </h5>
+          <p class="card-text">Food items that are rich in sugar and carbohydrates. Exact definitions are difficult.
+            In general, however, confectionery is divided into two broad and somewhat overlapping categories:
+            bakers' confections and sugar confections.</p>
+            <a class="btn btn-danger" href="/categories/9">View recipes</a>
+        </div>
+      </div>
     </div>
     <%- include('../partials/footer') %>
 </body>
+
 </html>

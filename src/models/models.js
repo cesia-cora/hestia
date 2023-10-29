@@ -2,7 +2,24 @@ const db = require('./db');
 
 const { DataTypes } = require('sequelize');
 
+const CategoryModel = db.define('categories', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+    },
+    category: {
+        type: DataTypes.STRING,
+        key: true,
+    },
+}, {
+    timestamps: false
+});
+
 const RecipeModel = db.define('recipes', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+    },
     title: {
         type: DataTypes.STRING,
         validate: {
@@ -40,10 +57,22 @@ const RecipeModel = db.define('recipes', {
     },
     category: {
         type: DataTypes.STRING,
+        key: true,
     },
     createdBy: {
         type: DataTypes.STRING
     }
 });
 
-module.exports = RecipeModel;
+CategoryModel.hasMany(RecipeModel, {
+    foreignKey: 'category',
+    as: 'categories_recipes',
+    onDelete: 'CASCADE'
+});
+RecipeModel.belongsTo(CategoryModel, {
+    foreignKey: 'category',
+    as: 'FK_recipes_categories',
+    onDelete: 'CASCADE'
+})
+
+module.exports = { CategoryModel, RecipeModel };

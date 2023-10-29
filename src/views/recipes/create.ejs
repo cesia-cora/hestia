@@ -9,6 +9,16 @@
 
     <div class="main">
       <br>
+      <nav
+        style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
+        aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/">Index</a></li>
+          <li class="breadcrumb-item"><a href="/recipes">Recipes</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Create recipe</li>
+        </ol>
+      </nav>
+      <br>
         <h5 class="titulo">Create your recipe</h5> 
         <% if (typeof errors != 'undefined') { %>
         <ul>
@@ -20,36 +30,52 @@
   
         <form action="/recipes/store" method="post" enctype="multipart/form-data">
           <div class="mb-3 row">
-            <label for="titulo" class="col-sm-2 col-form-label">Títle</label>
+            <label for="titulo" class="col-sm-2 col-form-label">Title:</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" name="titulo" id="titulo" value="<%= values.titulo %>"/>
+              <input type="text" class="form-control" name="title" id="titulo" value="<%= values.title %>"/>
             </div>
           </div>
           <div class="mb-3 row">
             <label for="imagen" class="col-sm-2 col-form-label">Image:</label>
             <div class="col-sm-8">
-              <input type="file" class="form-control" name="imagen" id="imagen" />
+              <input type="file" class="form-control" name="image" id="imagen" />
             </div>
           </div>
           <div class="mb-3 row">
             <label for="contenido" class="col-sm-2 col-form-label">Content:</label>
             <div class="col-sm-8">
-              <textarea class="form-control" name="contenido" id="contenido" rows="10"> <%= values.contenido %></textarea>
+              <textarea class="form-control" name="content" id="contenido" rows="10"> <%= values.content %></textarea>
             </div>
           </div>
           <div class="mb-3 row">
-            <label for="contenido" class="col-sm-2 col-form-label">Category: </label>
+            <label for="contenido" class="col-sm-2 col-form-label">Category:</label>
             <div class="col-sm-8">
-              <select class="form-select" aria-label="Default select example"><% values.categoria %>
+              <input type="text" class="form-control" list="categories" name="category" id="exampleDataList" placeholder="Search a category..." value="<%= values.category %>">
+              <datalist id="categories">
+                <option value="Pies">
+                <option value="Alfajores">
+                <option value="Cookies">
+                <option value="Mousse">
+                <option value="Custard">
+                <option value="Ice Cream">
+                <option value="Muffins">
+              </datalist>
+              <!-- <select class="form-select" aria-label="Default select example">
                 <option selected>Choose and option</option>
-                <option value="1">Tartas</option>
-                <option value="2">Galletas</option>
+                <option value="1">Pies</option>
+                <option value="2">Cookies</option>
                 <option value="3">Alfajores</option>
-              </select>
+                <option value="4">Mousse</option>
+                <option value="5">Custard</option>
+                <option value="6">Ice Cream</option>
+                <option value="7">Muffins</option>
+              </select> -->
             </div>
           </div>
-          <button type="submit" class="btn btn-danger btn-lg">Upload recipe</button>
-          <a href="/" class="btn btn-warning btn-lg">Go back</a>
+          <div class="d-flex justify-content-evenly">
+            <button type="submit" class="btn btn-danger btn-lg">Upload recipe</button>
+            <a href="/" class="btn btn-warning btn-lg">Go back</a>
+          </div>
         </form>
       </div>
 

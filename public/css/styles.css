@@ -41,6 +41,11 @@ html, body {
     background-color: var(--background) !important;
     border-bottom: 1.5px solid black;
     font-size: 20px;
+    color: inherit;
+}
+
+.navbar-toggler-icon {
+    background-image: url(https://icon-library.com/images/android-hamburger-menu-icon/android-hamburger-menu-icon-8.jpg);
 }
 
 .breadcrumb {
@@ -59,6 +64,7 @@ html, body {
 
 a {
     text-decoration: none;
+    color: inherit;
 }
 
 .nav-link {
@@ -93,17 +99,23 @@ a {
     transition: all 0.5s ease-in-out;
 }
 
+.btn-close, .navbar-toggler {
+    border: 1px solid rgb(202, 202, 192);
+}
+
 .grid {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 12%;
+    flex-flow: wrap;
+    min-height: 100vw;
 }
 
 .card {
     font-family: 'Assistant', sans-serif;
     background-color: var(--background);
     color: var(--beige);
+    width: 30%;
 }
 
 .card_i {
@@ -111,12 +123,12 @@ a {
     overflow: hidden;
     text-overflow: ellipsis;
     box-shadow: 10px 10px 20px 2px black;
-    transition: all 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .card_i:hover {
-    -webkit-transform: scale(1.12, 1.12);
-    transform: scale(1.12, 1.12);
+    -webkit-transform: scale(1.02, 1.02);
+    transform: scale(1.02, 1.02);
 }
 
 .card_cat {
@@ -126,23 +138,20 @@ a {
     justify-content: center;
     align-items: center;
     margin: auto;
+    border: 1px solid beige;
+}
+
+.card_cat img {
+    width: 400px;
+    border-radius: 20px;
 }
 
 .card-footer {
     border-top: 1px solid var(--beige);
 }
 
-.grid-item {
-    width: 25%;
-}
-
 .svg {
     width: 800px;
-}
-
-#btn-book {
-    background-color: var(--purple);
-    color: whitesmoke;
 }
 
 .hero-image {
@@ -261,12 +270,25 @@ footer a {
     margin-top: 2%;
     margin-bottom: 2%;
     width: 50%;
+    border: 1px solid beige;
+    border-radius: 5%;
 }
 
 .container-texto {
-    width: 90%;
-    margin: 2%;
+    background-color: rgb(245, 245, 245, 0.1);
+    margin: 2% 3%;
+    padding: 2%;
+    border-radius: 5px;
     font-size: 20px;
+}
+
+.page-link, .page-link:hover {
+    color: black;
+}
+
+.page-link.active, .active > .page-link {
+    background-color: brown;
+    border-color: brown;
 }
 
 .input-group {
@@ -280,6 +302,81 @@ footer a {
     background-color: var(--background);
     color: var(--beige);
     font-size: 22px;
+}
+
+.col-form-label {
+    padding-left: 5%;
+}
+
+@media (prefers-color-scheme: light) {
+    html, body {
+        background: var(--cheese);
+    }
+
+    .navbar, .bg-body-tertiary, .offcanvas-body, .offcanvas {
+        background-color: var(--cheese) !important;
+        border-bottom: 1.5px solid black;
+        font-size: 20px;
+        color: black;
+    }
+
+    .logo, .nav-link {
+        color: black;
+    }
+
+    .nav-link:after {
+        background: var(--darkpurple);
+    }
+
+    .card {
+        background-color: var(--cheese);
+        color: var(--background);
+    }
+
+    .card_i {
+        border: 2px solid grey;
+        box-shadow: none;
+    }
+
+    .breadcrumb {
+        margin: 1% 0 1% 2%;
+        color: var(--background);
+        font-size: 18px;
+    }
+    
+    .breadcrumb-item > a {
+        color: palevioletred;
+    }
+
+    .breadcrumb > .active {
+        color: grey;
+    }
+
+    .container-texto {
+        background-color: rgb(0, 0, 0, 0.04);
+        color: var(--background);
+    }
+
+    .titulo {
+        color: var(--background);
+    }
+
+    footer {
+        background-color: var(--cheese);
+        color: var(--background);
+    }
+
+    footer a {
+        color: var(--background);
+    }
+
+    footer a:hover {
+        color: var(--purple)
+    }
+
+    label {
+        color: var(--background);
+    }
 }
 
 @media only screen and (max-width: 600px) {

@@ -8,7 +8,43 @@
     <%- include('../partials/nav') %>
 
   <div class="main">
-  
+
+    <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 20 }'>
+      <% recipes.forEach(recipe => { %>
+      <a href="/recipes/<%= recipe.id %>" style="color:black;">
+      <div class="card grid-item card_i">
+        <img src="../uploads/<%= recipe.imagen %>" class="card-img-top" alt="<%= recipe.titulo %>">
+        <div class="card-body">
+          <h5 class="card-title"><%= recipe.title %></h5>
+          <p class="card-text"><%- recipe.content.substring(0, 100) %></p>
+        </div>
+        <div class="card-footer">
+          <% if (recipe.category == "Alfajores") { %>
+            <img src="../../images/icons/macaroons.png" width="30"> <%= recipe.category %>
+          <% } else if (recipe.category == "Galletas") { %>
+            <img src="../../images/icons/galletas.png" width="30"> <%= recipe.category %>
+          <% } else if (recipe.category == "Pies") { %>
+            <img src="../../images/icons/cheesecake-light.png" width="30"> <%= recipe.category %>
+          <% } else if (recipe.category == "Mousses") { %>
+            <img src="../../images/icons/whipped-cream-light.png" width="30"> <%= recipe.category %>
+          <% } else if (recipe.category == "Flanes") { %>
+            <img src="../../images/icons/custard-light" width="30"> <%= recipe.category %>
+          <% } else if (recipe.category == "Helados") { %>
+            <img src="../../images/icons/helado-light.png" width="30"> <%= recipe.category %>
+          <% } else if (recipe.category == "Muffins") { %>
+            <img src="../../images/icons/muffin-light.png" width="30"> <%= recipe.category %>
+          <% } else { %>
+            <%= recipe.category %>
+          <% } %>
+        </div>
+        <div class="card-footer">
+          Created by: <%= recipe.createdBy %>
+        </div>
+      </div>
+      <% }) %>
+      </a>
+    </div>
+    
   </div>
 
     <%- include('../partials/footer') %>

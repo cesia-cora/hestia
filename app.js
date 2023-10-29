@@ -3,6 +3,7 @@ const app = express();
 const path = require('path');
 const methodOverride = require("method-override");
 require('dotenv').config();
+const connection = require('./src/models/connection');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
@@ -22,8 +23,6 @@ app.use(
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname + '/src/views'));
 
-const connection = require('./src/models/connection');
-
 app.use('/recipes', require('./src/routes/recipes'));
 app.use('/categories', require('./src/routes/categories'));
 app.use('/profile', require('./src/routes/profile'));
@@ -33,10 +32,6 @@ app.get('/', (req, res) => {
   console.log('id: ', req.session.userId, ' username: ', req.session.username);
   res.render('index', {user: req.session.userId, username: req.session.username});
 });
-
-app.get('/search', (req, res) => {
-  res.send('aleluya')
-})
 
 // app.use(function (err, req, res, next) {
 //   // set locals, only providing error in development

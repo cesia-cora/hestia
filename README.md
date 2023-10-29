@@ -1,5 +1,10 @@
 ## Hestia Cooking
-<br>
+
+![Static Badge](https://img.shields.io/badge/ejs-%5E3.1.8-orange)
+![Static Badge](https://img.shields.io/badge/express-%5E4.18.2-green)
+![Static Badge](https://img.shields.io/badge/mysql-%5E2.18.1-blue)
+![Static Badge](https://img.shields.io/badge/sequelize-%5E6.32.1-68aba6)
+
 A cooking web app to share dessert recipes.
 This was created as a practice after a long training course with Express.js and MySQL.
 
