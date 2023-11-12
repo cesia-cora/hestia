@@ -143,7 +143,7 @@ a {
 
 .card_cat img {
     width: 400px;
-    border-radius: 20px;
+    background-size: initial;
 }
 
 .card-footer {
@@ -207,60 +207,6 @@ footer a {
 .dropdown {
     margin: 2%;
     width: 20%;
-}
-
-.container-mobile {
-    background-color: rgb(33, 25, 25);
-    color: var(--beige);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 15%;
-    padding: 5% 0;
-    min-height: 100vh;
-}
-
-.container-mobile img:nth-child(2) {
-    border-radius: 50px;
-    border: 2px solid black;
-    transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
-    box-shadow: 10px 10px 20px 2px black;
-}
-
-.container-mobile img:nth-child(2):hover {
-    transform: scale(1.12);
-}
-
-.mobile-c1 {
-    font-size: 30px;
-}
-
-.mobile-c2 {
-    font-size: 20px;
-}
-
-.container-book {
-    background-color: rgb(33, 25, 25);
-    color: var(--beige);
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 15%;
-    padding: 5% 0;
-    min-height: 100vh;
-}
-
-.container-book img {
-    border-radius: 50px;
-    border: 2px solid black;
-    transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
-    box-shadow: 10px 10px 20px 2px black;
-}
-
-.container-book img:hover {
-    transform: scale(1.12);
 }
 
 .img-mostrar {

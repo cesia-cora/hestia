@@ -69,6 +69,7 @@ CategoryModel.hasMany(RecipeModel, {
     as: 'categories_recipes',
     onDelete: 'CASCADE'
 });
+
 RecipeModel.belongsTo(CategoryModel, {
     foreignKey: 'category',
     as: 'FK_recipes_categories',

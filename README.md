@@ -12,19 +12,16 @@ This was created as a practice after a long training course with Express.js and 
 
 Hestia is the greek goddess of the hearth.
 
-### How to run:
-1. Run the SQL port
-
-2. `npm install` (to install all dependencies)
-
-3. `node --watch app.js`
-
 ### Features:
 
-- CRUD
-    - image uploading
+- UI
+    - Categories navigation
+    - Pagination
+- Database
+    - Create, view, edit and delete recipes
+    - Image uploading
 - Authenthication
-    - register, log in, log out, encrypted password, profile view
+    - Register, log in, log out, encrypted password, profile view
 
 ### Dependencies:
 
@@ -33,6 +30,13 @@ Hestia is the greek goddess of the hearth.
 - Cookie-session
 - Bcrypt
 - Multer/Sharp
+
+### How to run:
+1. Run your SQL port
+
+2. `npm install` (to install all dependencies)
+
+3. Run local host `node --watch app.js`
 
 ### Routes:
 
