@@ -15,5 +15,6 @@ router.get('/:id/edit', controller.edit);
 router.put('/:id/update', controller.update);
 router.put('/:id/update_image', upload.single('image'), controller.update_image)
 router.delete('/:id/destroy', controller.destroy);
+router.get('/:id/downloadPdf', controller.downloadPdf);
 
 module.exports = router;

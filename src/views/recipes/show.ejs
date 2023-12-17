@@ -23,6 +23,8 @@
                 </ol>
             </nav>
 
+            <a class="btn btn-primary btn-lg ms-5" href="/recipes/<%= recipe.id %>/downloadPdf">Download PDF</a>
+
             <img src="../uploads/<%= recipe.image %>" class="img-mostrar">
             <% if (recipe.createdBy==username && typeof user !='undefined' ) { %>
                 <button class="btn btn-danger ms-5" onclick="showBtnEdit()">Change image</button>
