@@ -8,7 +8,6 @@
     <%- include('../partials/nav') %>
 
     <div class="main">
-      <br>
       <nav
         style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
         aria-label="breadcrumb">
@@ -27,7 +26,7 @@
           <% }) %>
         </ul>
         <% } %>
-  
+        <br>
         <form action="/recipes/store" method="post" enctype="multipart/form-data">
           <div class="mb-3 row">
             <label for="titulo" class="col-sm-2 col-form-label">Title:</label>
@@ -72,9 +71,10 @@
               </select> -->
             </div>
           </div>
+          <br>
           <div class="d-flex justify-content-evenly">
-            <button type="submit" class="btn btn-danger btn-lg">Upload recipe</button>
-            <a href="/" class="btn btn-warning btn-lg">Go back</a>
+            <button type="submit" class="btn btn-danger">Upload recipe</button>
+            <a href="/" class="btn btn-warning">Go back</a>
           </div>
         </form>
       </div>

@@ -138,24 +138,30 @@ const destroy = async (req, res) => {
 };
 
 const downloadPdf = async (req, res) => {
-    const recipe = await RecipeModel.findByPk(req.params.id);
 
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
+    try {
+        const recipe = await RecipeModel.findByPk(req.params.id);
 
-    const htmlContent = `
-        <h1 style="margin: 5% 5%;color:'indianred';font-family:'Trebuchet MS', sans-serif">${recipe.title}</h1>
-        <h4 style="margin: 2% 5% 5% 5%;font-family:'Trebuchet MS', sans-serif"">By: ${recipe.createdBy}</h4>
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+
+        const htmlContent = `
+        <h1 style="margin: 5% 5%;color:'indianred';font-family:'Trebuchet MS', sans-serif; text-decoration: underline palevioletred wavy">${recipe.title}</h1>
+        <img style="margin: 1% 5%; width: 600px" src="http://localhost:3000/uploads/${recipe.image}">
+        <h4 style="margin: 2% 5% 5% 5%;font-family:'Trebuchet MS', sans-serif; font-size:14px;">By: ${recipe.createdBy}</h4>
         <div style="margin: 2% 5%;font-family:'Trebuchet MS', sans-serif"">${recipe.content}</div>
     `;
 
-    await page.setContent(htmlContent);
-    const pdf = await page.pdf({ format: 'A4' });
+        await page.setContent(htmlContent);
+        const pdf = await page.pdf({ format: 'A4' });
 
-    res.set({ 'Content-Type': 'application/pdf', 'Content-Length': pdf.length });
-    res.send(pdf);
+        res.set({ 'Content-Type': 'application/pdf', 'Content-Length': pdf.length });
+        res.send(pdf);
 
-    await browser.close();
+        await browser.close();
+    } catch (error) {
+        console.log(error)
+    }
 };
 
 module.exports = {
