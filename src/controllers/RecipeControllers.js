@@ -5,7 +5,8 @@ const UserModel = require('../models/UserModel');
 const path = require('path');
 const Sequelize = require('sequelize');
 const { paginate } = require('../models/paginate');
-const puppeteer = require('puppeteer')
+const puppeteer = require('puppeteer');
+const { v4: uuidv4 } = require('uuid');
 
 const index = async (req, res) => {
     const { page, size } = req.query;
@@ -51,15 +52,16 @@ const create = (req, res) => {
 const store = async (req, res) => {
     console.log(req.file);
     try {
+        const uniqueFileName = uuidv4() + '_' + req.file.originalname;
         await sharp(req.file.buffer)
             .resize(1000)
             .toFile(
-                path.join(__dirname, `../../public/uploads/${req.file.originalname}`)
+                path.join(__dirname, `../../public/uploads/${uniqueFileName}`)
             );
 
         await RecipeModel.create({
             ...req.body,
-            image: req.file.originalname,
+            image: uniqueFileName,
             createdBy: req.session.username
         }, {
             include: [{
