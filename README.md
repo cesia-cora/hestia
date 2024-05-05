@@ -40,7 +40,15 @@ Hestia is the greek goddess of the hearth.
 ### How to run:
 1. Run your MySQL port
 
-2. Adjust src/models/connection.js with your database credentials (host, username, password, database name)
+2. Create an ".env" file and adjust your database credentials
+
+Example:
+
+`PORT=3000
+DB_HOST=127.0.0.1
+DB_USER=root
+DB_PASS=1234
+DB_NAME=hestia_project`
 
 3. `npm install` (to install all dependencies)
 
