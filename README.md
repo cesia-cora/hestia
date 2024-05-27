@@ -1,11 +1,11 @@
-## Hestia Cooking
+![Static Badge](https://img.shields.io/badge/ejs-%5E3.1.8-darksalmon?style=for-the-badge&logo=ejs)
+![Static Badge](https://img.shields.io/badge/express-%5E4.19.2-darkseagreen?style=for-the-badge&logo=express)
+![Static Badge](https://img.shields.io/badge/mysql2-%5E3.9.7-steelblue?style=for-the-badge&logo=mysql&logoColor=lightblue)
+![Static Badge](https://img.shields.io/badge/sequelize-%5E6.32.1-68aba6?style=for-the-badge&logo=sequelize)
+![Static Badge](https://img.shields.io/badge/puppeteer-%5E21.6.0-palevioletred?style=for-the-badge&logo=puppeteer)
+![Static Badge](https://img.shields.io/badge/uuid-%5E9.0.1-mediumslateblue?style=for-the-badge)
 
-![Static Badge](https://img.shields.io/badge/ejs-%5E3.1.8-darksalmon)
-![Static Badge](https://img.shields.io/badge/express-%5E4.19.2-darkseagreen)
-![Static Badge](https://img.shields.io/badge/mysql2-%5E3.9.7-steelblue)
-![Static Badge](https://img.shields.io/badge/sequelize-%5E6.32.1-68aba6)
-![Static Badge](https://img.shields.io/badge/puppeteer-%5E21.6.0-palevioletred)
-![Static Badge](https://img.shields.io/badge/uuid-%5E9.0.1-mediumslateblue)
+## Hestia Cooking
 
 A cooking web app to share dessert recipes.
 This was created as practice after a long training course with Express.js and MySQL.
