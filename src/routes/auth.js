@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const bcryptjs = require("bcryptjs");
+const crypto = require("crypto");
+//const nodemailer = require("nodemailer");
 
 const connection = require("../models/connection");
+const UserModel = require("../models/UserModel");
 
 router.get("/login", (req, res) => {
   res.render("auth/login");
@@ -18,18 +21,18 @@ router.post("/login", (req, res) => {
       }
 
       if (!results.length) {
-        res.send("El usuario y/o contraseña son incorrectos");
+        res.send("Incorrect username or password");
       }
       else {
         const user = results.shift();
         if (!bcryptjs.compareSync(req.body.password, user.password)) {
-          res.send("El usuario y/o contraseña son incorrectos");
+          res.send("Incorrect username or password");
         }
         else {
           req.session.userId = user.id;
           req.session.username = user.username;
 
-          res.redirect("/");
+          res.redirect("/login");
         }
       }
     }

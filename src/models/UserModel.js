@@ -11,7 +11,13 @@ const UserModel = db.define('users', {
     },
     username: {
         type: DataTypes.STRING,
-    }
+    },
+    /*resetPasswordToken: {
+        type: DataTypes.STRING,
+    },
+    resetPasswordExpires: {
+        type: DataTypes.DATE,
+    }*/
 }, {
     timestamps: false,
 });

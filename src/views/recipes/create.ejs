@@ -49,26 +49,12 @@
           <div class="mb-3 row">
             <label for="contenido" class="col-sm-2 col-form-label">Category:</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" list="categories" name="category" id="exampleDataList" placeholder="Search a category..." value="<%= values.category %>">
-              <datalist id="categories">
-                <option value="Pies">
-                <option value="Alfajores">
-                <option value="Cookies">
-                <option value="Mousse">
-                <option value="Custard">
-                <option value="Ice Cream">
-                <option value="Muffins">
-              </datalist>
-              <!-- <select class="form-select" aria-label="Default select example">
-                <option selected>Choose and option</option>
-                <option value="1">Pies</option>
-                <option value="2">Cookies</option>
-                <option value="3">Alfajores</option>
-                <option value="4">Mousse</option>
-                <option value="5">Custard</option>
-                <option value="6">Ice Cream</option>
-                <option value="7">Muffins</option>
-              </select> -->
+              <select class="form-select" name="category" id="categoria" aria-label="Default select example">
+                <option selected="" selected disabled hidden>Choose an option</option>
+                <% categories.forEach(category => { %>
+                  <option value="<%= category.category %>" <%= values.category === category.category ? 'selected' : '' %>><%= category.category %></option>
+                <% }) %>
+              </select>
             </div>
           </div>
           <br>

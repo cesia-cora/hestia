@@ -45,8 +45,9 @@ const search = async (req, res) => {
     res.render('recipes/search', { recipes: recipes, q: searchTerm, user: req.session.userId, username: req.session.username })
 }
 
-const create = (req, res) => {
-    res.render('recipes/create', { values: {}, user: req.session.userId, username: req.session.username });
+const create = async (req, res) => {
+    const categories = await CategoryModel.findAll();
+    res.render('recipes/create', { categories: categories,values: {}, user: req.session.userId, username: req.session.username });
 };
 
 const store = async (req, res) => {
