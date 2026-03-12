@@ -23,13 +23,14 @@ Hestia is the greek goddess of the hearth.
 - Database
     - Create, view, edit and delete recipes
     - Image uploading
+    - Atomic transactions
 - Authenthication
     - Register, log in, log out, encrypted password, profile view
 
 ### Dependencies:
 
 - Express.js
-- Sequelize
+- Sequelize & Sequelize-cli
 - Cookie-session
 - Bcrypt
 - Multer/Sharp
@@ -44,11 +45,15 @@ Hestia is the greek goddess of the hearth.
 
 Example:
 
-`PORT=3000
+<pre>PORT=3000
+
 DB_HOST=127.0.0.1
+
 DB_USER=root
+
 DB_PASS=1234
-DB_NAME=hestia_project`
+
+DB_NAME=hestia_project</pre>
 
 3. `npm install` (to install all dependencies)
 

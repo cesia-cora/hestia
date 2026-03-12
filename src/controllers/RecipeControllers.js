@@ -1,12 +1,14 @@
 const { connection } = require('../models/connection');
 const sharp = require('sharp');
-const { CategoryModel, RecipeModel } = require('../models/models');
+const { CategoryModel, RecipeModel, IngredientModel } = require('../models/models');
 const UserModel = require('../models/UserModel');
 const path = require('path');
 const Sequelize = require('sequelize');
+const fs = require('fs').promises;
 const { paginate } = require('../models/paginate');
 const puppeteer = require('puppeteer');
 const { v4: uuidv4 } = require('uuid');
+const asyncHandler = require('../utils/asyncHandler');
 
 const index = async (req, res) => {
     const { page, size } = req.query;
@@ -15,6 +17,7 @@ const index = async (req, res) => {
     const recipes = await RecipeModel.findAndCountAll({
         limit: limit,
         offset: offset,
+        include: [{ model: IngredientModel, as: 'FK_recipes_ingredients', through: { attributes: [] } }]
     });
 
     const totalRecipes = recipes.count;
@@ -33,15 +36,30 @@ const index = async (req, res) => {
 
 const search = async (req, res) => {
     const searchTerm = req.query.q;
-    const recipes = await RecipeModel.findAll(
+    const by = req.query.by;
+    let recipes;
+    if (by === 'ingredient') {
+        recipes = await RecipeModel.findAll(
         {
-            where: {
-                title: {
-                    [Sequelize.Op.like]: `%${searchTerm}%`
-                }
-            }
-        }
-    );
+            include: [{
+                model: IngredientModel,
+                as: 'FK_recipes_ingredients',
+                where: {
+                    name: {
+                        [Sequelize.Op.like]: `%${searchTerm}%`} },
+                    through: { attributes: [] }
+                }]
+            });
+        } else {
+            recipes = await RecipeModel.findAll({
+                where: {
+                    title: { 
+                        [Sequelize.Op.like]: `%${searchTerm}%`
+                    }
+            },
+            include: [{ model: IngredientModel, as: 'FK_recipes_ingredients', through: { attributes: [] } }]
+        });
+    }
     res.render('recipes/search', { recipes: recipes, q: searchTerm, user: req.session.userId, username: req.session.username })
 }
 
@@ -51,15 +69,19 @@ const create = async (req, res) => {
 };
 
 const store = async (req, res) => {
+    const uniqueFileName = uuidv4() + '_' + req.file.originalname;
+    const filePath = path.join(__dirname, `../../public/uploads/${uniqueFilename}`);
     console.log(req.file);
-    try {
-        const uniqueFileName = uuidv4() + '_' + req.file.originalname;
-        await sharp(req.file.buffer)
-            .resize(1000)
-            .toFile(
-                path.join(__dirname, `../../public/uploads/${uniqueFileName}`)
-            );
 
+    await sharp(req.file.buffer)
+        .resize(1000)
+        .toFile(
+            path.join(__dirname, `../../public/uploads/${uniqueFileName}`)
+        );
+
+    const t = await connection.transaction({ isolationLevel: Sequelize.Transaction.ISOLATION_LEVELS.SERIALIZABLE });
+
+    try {
         await RecipeModel.create({
             ...req.body,
             image: uniqueFileName,
@@ -69,18 +91,30 @@ const store = async (req, res) => {
                 model: CategoryModel,
                 foreignKey: 'category',
                 as: 'FK_recipes_categories'
-            }]
+            }],
+            transaction: t
         });
 
+        const names = (req.body.ingredients || '').split(',').map(s => s.trim()).filter(Boolean);
+        const instances = await Promise.all(
+            names.map(name => IngredientModel.findOrCreate({ where: { name }, transaction: t }).then(([inst]) => inst))
+        );
+        if (instances.length) await recipe.setFK_recipes_ingredients(instances, { transaction: t });
+
+        await t.commit();
         res.redirect('/recipes');
     } catch (error) {
+        await t.rollback();
+        await fs.unlink(filePath).catch(() => {});
         res.render('recipes/create', { values: req.body, errors: error.errors, user: req.session.userId, username: req.session.username });
         console.log(error);
     }
 };
 
 const show = async (req, res) => {
-    const recipe = await RecipeModel.findByPk(req.params.id);
+    const recipe = await RecipeModel.findByPk(req.params.id, {
+        include: [{ model: IngredientModel, as: 'FK_recipes_ingredients', through: { attributes: [] } }]
+    });
     res.render('recipes/show', { recipe: recipe, user: req.session.userId, username: req.session.username });
 };
 
@@ -102,50 +136,102 @@ const myrecipes = async (req, res) => {
 }
 
 const edit = async (req, res) => {
-    const recipe = await RecipeModel.findByPk(req.params.id);
+    const recipe = await RecipeModel.findByPk(req.params.id, {
+        include: [{  model: IngredientModel, as: 'FK_ingredients_recipes', through: { attributes: [] } }]
+    });
     res.render('recipes/edit', { recipe: recipe, user: req.session.userId, username: req.session.username });
 };
 
 const update = async (req, res) => {
-    await RecipeModel.update(
-        req.body,
-        { where: { id: req.params.id } },
-        {
-            include: CategoryModel
-        }
-    );
+    const t = await connection.transaction();
 
-    res.redirect('/recipes');
+    try {
+        await RecipeModel.update(
+            req.body,
+            { where: { id: req.params.id }, transaction: t },
+            {
+                include: CategoryModel
+            }
+        );
+
+        if (typeof req.body.ingredients !== 'undefined') {
+            const recipe = await RecipeModel.findByPk(req.params.id, { transaction: t });
+            const names = (req.body.ingredients || '').split(',').map(s => s.trim()).filter(Boolean);
+            const instances = await Promise.all(
+                names.map(name => IngredientModel.findOrCreate({ where: { name }, transaction: t }).then(([inst]) => inst))
+            );
+            await recipe.setFK_recipes_ingredients(instances, { transaction: t });
+        }
+
+        await t.commit();
+        res.redirect('/recipes');
+    } catch (error) {
+        await t.rollback();
+        res.render('recipes/edit', { recipe: { ...req.body, id: req.params.id }, errors: error.errors, user: req.session.userId, username: req.session.username });
+        console.log(error);
+    }
 };
 
 const update_image = async (req, res) => {
+    const uniqueFileName = uuidv4() + '_' + req.file.originalname;
+    const filePath = path.join(__dirname, `../../public/uploads/${uniqueFileName}`);
+
     await sharp(req.file.buffer)
         .resize(1000)
         .toFile(
             path.join(__dirname, `../../public/uploads/${req.file.originalname}`)
         );
 
-    await RecipeModel.update(
-        {
-            ...req.body,
-            image: req.file.originalname,
-        },
-        { where: { id: req.params.id } }
-    );
+    const t = await connection.transaction();
+
+    try {
+        await RecipeModel.update(
+            {
+                ...req.body,
+                image: req.file.originalname,
+            },
+            { where: { id: req.params.id }, transaction: t }
+        );
+
+    await t.commit();
     res.redirect('/recipes');
+    } catch (error) {
+        await t.rollback();
+        await fs.unlink(filePath).catch(() => {});
+        res.render('recipes/edit', { recipe: { ...req.body, id: req.params.id }, errors: error.errors, user: req.session.userId, username: req.session.username });
+        console.log(error);
+    }
 };
 
 const destroy = async (req, res) => {
-    await RecipeModel.destroy({ where: { id: req.params.id }, user: req.session.userId, username: req.session.username })
-    res.redirect('/recipes');
+    const t = await connection.transaction({ isolationLevel: Sequelize.Transaction.ISOLATION_LEVELS.SERIALIZABLE });
+    try {
+        const recipe = await RecipeModel.findByPk(req.params.id, { transaction: t, lock: t.LOCK.UPDATE });
+        if (!recipe) {
+            await t.rollback();
+            return res.status(404).send('Recipe not found');
+        }
+        await RecipeModel.destroy({ where: { id: req.params.id }, transaction: t });
+        await t.commit();
+
+        if (recipe.image) {
+            const imgPath = path.join(__dirname, `../../public/uploads/${recipe.image}`);
+            await fs.unlink(imgPath).catch(() => {});
+        }
+
+        res.redirect('/recipes');
+    } catch (error) {
+        await t.rollback();
+        console.log(error);
+    }
 };
 
 const downloadPdf = async (req, res) => {
-
+    let browser;
     try {
         const recipe = await RecipeModel.findByPk(req.params.id);
-
-        const browser = await puppeteer.launch();
+        if (!recipe) return res.status(404).send('Recipe not found');
+        browser = await puppeteer.launch();
         const page = await browser.newPage();
 
         const htmlContent = `
@@ -162,23 +248,23 @@ const downloadPdf = async (req, res) => {
         res.send(pdf);
 
         await browser.close();
-    } catch (error) {
-        console.log(error)
+    } finally {
+        if (browser) await browser.close().catch(() => {});
     }
 };
 
 module.exports = {
-    index,
-    search,
-    create,
-    store,
-    show,
-    edit,
-    update,
-    update_image,
-    destroy,
-    categories,
-    category,
-    myrecipes,
-    downloadPdf
+    index: asyncHandler(index),
+    search: asyncHandler(search),
+    create: asyncHandler(create),
+    store: asyncHandler(store),
+    show: asyncHandler(show),
+    edit: asyncHandler(edit),
+    update: asyncHandler(update),
+    update_image: asyncHandler(update_image),
+    destroy: asyncHandler(destroy),
+    categories: asyncHandler(categories),
+    category: asyncHandler(category),
+    myrecipes: asyncHandler(myrecipes),
+    downloadPdf: asyncHandler(downloadPdf)
 };

@@ -62,6 +62,9 @@
               <div class="card-footer">
                 By: <%= recipe.createdBy %>
               </div>
+              <div class="card-footer">
+                Ingredients: <%= recipe.FK_recipes_ingredients ? recipe.FK_recipes_ingredients.map(i=>i.name).join(', ') : '' %>
+              </div>
           </div>
           </a>
           <% }) %>

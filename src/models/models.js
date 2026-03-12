@@ -6,6 +6,7 @@ const CategoryModel = db.define('categories', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true
     },
     category: {
         type: DataTypes.STRING,
@@ -19,6 +20,7 @@ const RecipeModel = db.define('recipes', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
+        autoIncrement: true
     },
     title: {
         type: DataTypes.STRING,
@@ -64,6 +66,31 @@ const RecipeModel = db.define('recipes', {
     }
 });
 
+const IngredientModel = db.define('ingredients', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
+    },
+    unit: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+	unique: false
+   },
+   unitType: {
+	type: DataTypes.STRING,
+	allowNull: false,
+	unique: false
+   },
+}, {
+    timestamps: false
+});
+
 CategoryModel.hasMany(RecipeModel, {
     foreignKey: 'category',
     as: 'categories_recipes',
@@ -76,4 +103,22 @@ RecipeModel.belongsTo(CategoryModel, {
     onDelete: 'CASCADE'
 })
 
-module.exports = { CategoryModel, RecipeModel };
+RecipeModel.belongsToMany(IngredientModel, {
+    through: 'recipe_ingredients',
+    as: 'FK_recipes_ingredients',
+    foreignKey: 'recipeId',
+    otherKey: 'ingredientId',
+    onDelete: 'CASCADE',
+    timestamps: false,
+});
+
+IngredientModel.belongsToMany(RecipeModel, {
+    through: 'recipe_ingredients',
+    as: 'FK_ingredients_recipes',
+    foreignKey: 'ingredientId',
+    otherKey: 'recipeId',
+    onDelete: 'CASCADE',
+    timestamps: false,
+});
+
+module.exports = { CategoryModel, RecipeModel, IngredientModel };
