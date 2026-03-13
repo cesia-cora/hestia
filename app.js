@@ -33,5 +33,11 @@ app.get('/', (req, res) => {
   res.render('index', {user: req.session.userId, username: req.session.username});
 });
 
+transporter.verify().then(() => {
+  console.log('SMTP ready');
+}).catch(error => {
+  console.error('Error SMTP:', error);
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`http://localhost:${PORT}`));

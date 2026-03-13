@@ -27,11 +27,11 @@ const RecipeModel = db.define('recipes', {
         validate: {
             notEmpty: {
                 args: true,
-                msg: "Title cannot be empty",
+                msg: "Title cannot be empty.",
             },
             min: {
                 args: 5,
-                msg: "Title can only have 5 characters as minimum"
+                msg: "Title can only have 5 characters as minimum."
             }
         }
     },
@@ -82,11 +82,11 @@ const IngredientModel = db.define('ingredients', {
         allowNull: true,
 	unique: false
    },
-   unitType: {
-	type: DataTypes.STRING,
-	allowNull: false,
-	unique: false
-   },
+    unitType: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: false
+    },
 }, {
     timestamps: false
 });

@@ -11,13 +11,54 @@ const UserModel = db.define('users', {
     },
     username: {
         type: DataTypes.STRING,
+        unique: true,
+        allowNull: false,
+        validate: {
+            notEmpty: {
+                args: true,
+                msg: "Field cannot be empty."
+            },
+            min: {
+                args: 10,
+                msg: "Username can only have 10 characters as minimum."
+            }
+        }
     },
-    /*resetPasswordToken: {
+    email: {
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: false,
+        validate: {
+            notEmpty: {
+                args: true,
+                msg: "Field cannot be empty."
+            },
+            isEmail: {
+                args: true,
+                msg: "Must be a valid email address."
+            }
+        }
+    },
+    password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notEmpty: {
+                args: true,
+                msg: "Field cannot be empty."
+            },
+            min: {
+                args: 10,
+                msg: "Password can only have 10 characters."
+            }
+        }
+    },
+    resetPasswordToken: {
         type: DataTypes.STRING,
     },
     resetPasswordExpires: {
         type: DataTypes.DATE,
-    }*/
+    },
 }, {
     timestamps: false,
 });
